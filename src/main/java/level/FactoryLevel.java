@@ -1,13 +1,6 @@
 package level;
 
 public class FactoryLevel {
-
-	public static void main(String[] args) {
-		FactoryLevel t = new FactoryLevel();
-		Level a = t.getLevel("Advance");
-		
-		a.getCategory().forEach((k,v) -> System.out.println("key: "+k+" value:"+v));
-	}
 	
 	public Level getLevel(String lvl) {
 		if(lvl.equals("Basic")) {
