@@ -1,19 +1,28 @@
 package programs;
 
-import mongoDBclient.MongoConnection;
+import mongoDBclient.MongoDB;
 
 import org.bson.Document;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 public class Program {
 	double duration;
+	double tiempoVisto;
 	String name;
 	String categorybasic;
 	String categorymedium;
 	String categoryadvanced;
 	
 	public Program() {
-		int selection = (int) (Math.random()*3);
-		Document result = MongoConnection.getProgram(selection);
+		MongoDatabase db = MongoDB.getInstance();
+		MongoCollection<Document> collection = db.getCollection("programas");
+		int selection = (int) (Math.random() * collection.countDocuments());
+
+		Document query = new Document("number", selection);
+		Document result = collection.find(query).iterator().next();
+		
 		this.name = result.getString("name");
 		this.categorybasic = result.getString("categorybasic");
 		this.categorymedium = result.getString("categorymedium");
@@ -39,5 +48,13 @@ public class Program {
 	
 	public Double getDuration() {
 		return this.duration;
+	}
+	
+	public void setTiempoVisto(double tv) {
+		this.tiempoVisto = tv;
+	}
+	
+	public double getTiempoVisto() {
+		return this.tiempoVisto;
 	}
 }

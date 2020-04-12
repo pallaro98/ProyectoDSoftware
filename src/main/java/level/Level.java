@@ -2,6 +2,9 @@ package level;
 
 import java.util.HashMap;
 
+import category.Category;
+
 public interface Level {
-	HashMap<String, Integer> getCategory();
+	String getLevel();
+	HashMap<String, Category> getCategory();
 }

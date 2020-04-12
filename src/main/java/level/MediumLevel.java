@@ -8,13 +8,16 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
+import category.Category;
 import mongoDBclient.MongoDB;
 
 public class MediumLevel implements Level {
-	private HashMap<String, Integer> categories;
+	private String level;
+	private HashMap<String, Category> categories;
 
 	public MediumLevel() {
-		categories = new HashMap<String, Integer>();
+		categories = new HashMap<String, Category>();
+		this.level = "Medium";
 		setCategory();
 	}
 	
@@ -24,14 +27,21 @@ public class MediumLevel implements Level {
 		MongoCursor<Document> cursor = collection.find().iterator();
 		
 		while(cursor.hasNext()) {
+			Category c = new Category();
 			Document d = cursor.next();
-			this.categories.put(d.getString("category"), d.getInteger("mult"));
+			c.setMult(d.getInteger("mult"));
+			c.setMaxHr(d.getDouble("maxHr"));
+			this.categories.put(d.getString("category"), c);
 		}
 
 	}
 	
-	public HashMap<String, Integer> getCategory() {
+	public HashMap<String, Category> getCategory() {
 		return categories;
+	}
+
+	public String getLevel() {
+		return this.level;
 	}
 
 }
