@@ -12,26 +12,30 @@ import game.Game;
 public class ResultsView extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JButton  botonclose;
-	private JLabel resultslabel, iqLabel ;
+	private JLabel resultsLabel, iqLabel, categoriesLabel;
 	Game game;
 	
 	public ResultsView(Game g) {
 		game = g;
         setLayout(null);
         
-        resultslabel = new JLabel();
-        resultslabel.setText(g.getResultsLBL());
-        resultslabel.setBounds(0,0,200,200);
-        add(resultslabel);
-        
-        
         iqLabel = new JLabel();
-        iqLabel.setText("Tu IQ fue de: " + game.getIQ());
-        iqLabel.setBounds(0,100,200,200);
+        iqLabel.setText("Tu nuevo IQ fue de: " + game.getIQ());
+        iqLabel.setBounds(10,10,150,30);
         add(iqLabel);
         
+        resultsLabel = new JLabel();
+        resultsLabel.setText(g.getResultsLBL());
+        resultsLabel.setBounds(10,60,780,300);
+        add(resultsLabel);
+        
+        categoriesLabel = new JLabel();
+        categoriesLabel.setText(g.getPercentagesLBL());
+        categoriesLabel.setBounds(10,400,780,300);
+        add(categoriesLabel);
+        
         botonclose = new JButton("Close");
-        botonclose.setBounds(110,100,90,30);
+        botonclose.setBounds(350,700,90,30);
         add(botonclose);
         botonclose.addActionListener(this);
     }

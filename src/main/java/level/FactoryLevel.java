@@ -11,7 +11,7 @@ public class FactoryLevel {
 			return new MediumLevel();
 		}
 		
-		else if(lvl.equals("Advance")) {
+		else if(lvl.equals("Advanced")) {
 			return new AdvanceLevel();
 		}
 		

@@ -17,7 +17,7 @@ public class AdvanceLevel implements Level {
 
 	public AdvanceLevel() {
 		this.categories = new HashMap<String, Category>();
-		this.level = "Advance";
+		this.level = "Advanced";
 		setCategory();
 	}
 	

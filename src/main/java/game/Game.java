@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import frontend.MaxHoursView;
 import level.AdvanceLevel;
 import level.FactoryLevel;
 import level.Level;
@@ -16,8 +17,10 @@ public class Game {
 	HashMap<String, Double> categoryCount = new HashMap<String, Double>();
 	Double time;
 	Double initialT;
-	String result = "";
+	String result = "<html>Programas seleccionados:<br/>";
+	String percentages = "<html>Porcentaje Categorias:<br/>";
 	Level level;
+	String advertencia = "";
 	
 	public double getIQ() {
 		return this.IQ;
@@ -29,6 +32,18 @@ public class Game {
 	
 	public double getTime() {
 		return this.time;
+	}
+	
+	public double getInitialT() {
+		return this.initialT;
+	}
+	
+	public String getAdvertencia() {
+		return this.advertencia;
+	}
+	
+	public void setAdvertencia(String a) {
+		this.advertencia = a;
 	}
 	
 	public void setLevel(String l) {
@@ -43,16 +58,34 @@ public class Game {
 	
 	public String getProgramLBL() {
 		program = new Program();
-		return "Programa: " + program.getName() + " Duración: " + program.getDuration();
+		return program.getName();
+	}
+	
+	public Double getDurationLBL() {
+		return program.getDuration();
 	}
 	
 	public String getResultsLBL() {
 		this.elections.forEach((p)->{
-			result = result.concat("Programa: " + p.getName() + "-> Duración: " + p.getTiempoVisto());
+			result = result.concat("Programa: " + p.getName() + "-> Duración: " + p.getTiempoVisto() + "<br/>");
 		});
+		result = result.concat("</html>");
+		
 		System.out.println(result);
 		System.out.println(IQ);
 		return result;
+	}
+	
+	public String getPercentagesLBL() {
+		categoryCount.forEach((k, v) ->{
+			percentages = percentages.concat("Categoria: " + k + " -> " + (v / initialT) * 100 + "%" + "<br/>");
+		});
+		
+		percentages = percentages.concat("</html>");
+
+		System.out.println(percentages);
+		
+		return  percentages;
 	}
 	
 	public String getProgramCategoryLevel() {
@@ -77,6 +110,7 @@ public class Game {
 			}
 			
 			else if(categoryCount.get(cat) == (level.getCategory().get(cat).getMaxHr()/100) * initialT) {
+				advertencia = cat;
 				return;
 			}
 			
@@ -97,7 +131,7 @@ public class Game {
 				viewProgram(cat, this.time, 0.0);
 			}
 		}
-		
+		System.out.println("-------------------------");
 		categoryCount.forEach((k, v) -> System.out.println("Key: " + k +" Hr:" + v + " MAX:" + level.getCategory().get(cat).getMaxHr()));
 		this.elections.add(program);
 		this.IQ += this.level.getCategory().get(cat).getMult() * program.getTiempoVisto();
