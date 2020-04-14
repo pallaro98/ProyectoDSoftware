@@ -7,7 +7,7 @@ import org.bson.Document;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class Program {
+public class Program {	
 	double duration;
 	double tiempoVisto;
 	String name;

@@ -1,6 +1,4 @@
 game\Game.class
-game\Formulario.class
-mongoDBclient\MongoConnection.class
 programs\Program.class
 frontend\TimeView.class
 frontend\ResultsView.class
