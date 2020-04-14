@@ -44,7 +44,7 @@ public class GameView extends JFrame implements ActionListener{
         add(botonskip);
         botonskip.addActionListener(this);     
         
-        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 	
 	public void actionPerformed(ActionEvent e) {

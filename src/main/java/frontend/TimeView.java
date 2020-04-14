@@ -36,7 +36,10 @@ public class TimeView extends JFrame implements ActionListener{
         boton300h=new JButton("300");
         boton300h.setBounds(290,100,90,30);
         add(boton300h);
-        boton300h.addActionListener(this);        	
+        boton300h.addActionListener(this);   
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
     }
 	
 	public void actionPerformed(ActionEvent e) {

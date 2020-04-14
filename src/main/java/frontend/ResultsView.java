@@ -38,15 +38,14 @@ public class ResultsView extends JFrame implements ActionListener{
         botonclose.setBounds(350,700,90,30);
         add(botonclose);
         botonclose.addActionListener(this);
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==botonclose) {
 			this.setVisible(false);
+			System.exit(1);
 		}      
     }
-	
-	
-	
-	
 }

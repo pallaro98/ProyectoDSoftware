@@ -45,7 +45,9 @@ public class LevelView extends JFrame implements ActionListener{
         botonadvanced = new JButton("Advanced");
         botonadvanced.setBounds(290,100,90,30);
         add(botonadvanced);
-        botonadvanced.addActionListener(this);        	
+        botonadvanced.addActionListener(this);        
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 	
 	public void actionPerformed(ActionEvent e) {

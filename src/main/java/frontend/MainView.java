@@ -1,5 +1,6 @@
 package frontend;
 
+
 import game.Game;
 
 
@@ -11,6 +12,7 @@ public class MainView {
 		levelView.setBounds(0,0,400,200);
 		levelView.setVisible(true);
 		levelView.setTitle("Streaming Content Game");
+
 	}
 
 }

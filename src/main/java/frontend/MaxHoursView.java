@@ -27,6 +27,8 @@ public class MaxHoursView extends JFrame implements ActionListener{
         botonclose.setBounds(230,60,90,30);
         add(botonclose);
         botonclose.addActionListener(this);
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
 	public void actionPerformed(ActionEvent e) {
