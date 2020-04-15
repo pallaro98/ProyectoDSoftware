@@ -6,51 +6,115 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import game.Game;
 
-public class LevelView extends JFrame implements ActionListener{
-
+/**
+ * LevelView Class.
+ * 
+ */
+public class LevelView extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * botones.
+	 * 
+	 */
 	private JButton botonbasic, botonmedium, botonadvanced;
-	private JLabel instructionslabel, l;
 	
-	Game game;
+	/**
+	 * etiquetas.
+	 * 
+	 */
+	private JLabel instructionslabel;
 	
-	public LevelView(Game g) {
+	/**
+	 * Constantes.
+	 * 
+	 */
+	static final int	ZERO = 0, 
+						TEN = 10, 
+						TWENTY = 20, 
+						THIRTY = 30, 
+						FIFTY = 50,
+						SEVENTY = 70,
+						NINETY = 90,
+						ONEHUNDRED = 100,
+						ONEHUNDREDTWENTY = 120,
+						ONEHUNDREDFIFTY = 150,
+						TWOHUNDRED = 200,
+						TWOHUNDREDNINETY = 290,
+						THREEHUNDREDSEVENTY = 370,
+						FOURHUNDRED = 400,
+						FOURHUNDREDEIGHTY = 480,
+						FIVEHUNDRED = 500,
+						EIGHTHUNDRED = 800;
+	
+	/**
+	 * juego.
+	 */
+	private Game game;
+	
+	/**
+	 * constructor.
+	 * @param g
+	 * Juego actual.
+	 */
+	public LevelView(final Game g) {
 		this.game = g;
         setLayout(null);
         
-        //l = new JLabel("<html>Hello World!<br/>blahblahblah</html>", SwingConstants.CENTER);
-        //l.setBounds(0,0,100,30);
-        //add(l);
-        
         instructionslabel = new JLabel();
-        instructionslabel.setText("Seleccione el nivel en el que desea jugar:");
-        instructionslabel.setBounds(10,20,400,50);
+        instructionslabel.setText(
+        		"Seleccione el nivel en el que desea jugar:"
+        );
+        instructionslabel.setBounds(
+        		TEN,
+        		TWENTY,
+        		FOURHUNDRED,
+        		FIFTY
+        );
         add(instructionslabel);
         
         botonbasic = new JButton("Basic");
-        botonbasic.setBounds(10,100,90,30);
+        botonbasic.setBounds(
+        		TEN,
+        		ONEHUNDRED,
+        		NINETY,
+        		THIRTY
+        );
         add(botonbasic);
         botonbasic.addActionListener(this);
         
         botonmedium = new JButton("Medium");
-        botonmedium.setBounds(150,100,90,30);
+        botonmedium.setBounds(
+        		ONEHUNDREDFIFTY,
+        		ONEHUNDRED,
+        		NINETY,
+        		THIRTY
+        );
         add(botonmedium);
         botonmedium.addActionListener(this);
         
         botonadvanced = new JButton("Advanced");
-        botonadvanced.setBounds(290,100,90,30);
+        botonadvanced.setBounds(
+        		TWOHUNDREDNINETY,
+        		ONEHUNDRED,
+        		NINETY,
+        		THIRTY
+        );
         add(botonadvanced);
         botonadvanced.addActionListener(this);        
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 	
-	public void actionPerformed(ActionEvent e) {
+	/**
+	 * acciones botones.
+	 * @param e
+	 * evento.
+	 */
+	public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == botonbasic) {
             openSelectTime("Basic");
         }
@@ -62,15 +126,26 @@ public class LevelView extends JFrame implements ActionListener{
         }
     }
 	
-	public void openSelectTime(String s) {
+	/**
+	 * abrir siguiente vista.
+	 * @param s
+	 * nivel.
+	 */
+	public void openSelectTime(final String s) {
 		game.setLevel(s);
 		
 		this.setVisible(false);
 		TimeView timeView = new TimeView(game);
-		timeView.setBounds(0,0,400,200);
+		timeView.setBounds(
+				ZERO,
+				ZERO,
+				FOURHUNDRED,
+				TWOHUNDRED
+		);
 		timeView.setVisible(true);
-    	timeView.setTitle("Streaming Content Game     " + game.getLevel());
+    	timeView.setTitle(
+    			"Streaming Content Game     " 
+    			+ game.getLevel()
+    	);
 	}
-	
-	
 }

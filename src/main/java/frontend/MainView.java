@@ -1,18 +1,41 @@
 package frontend;
 
-
 import game.Game;
+/**
+ * MainView Class.
+ * 
+ */
+public final class MainView {
+	/**
+	 * constructor.
+	 */
+	private MainView() {
+	}
+	/**
+	 * Constantes.
+	 * 
+	 */
+	static final int	ZERO = 0,
+						TWOHUNDRED = 200,
+						FOURHUNDRED = 400;
 
-
-public class MainView {
-
-	public static void main(String[] args) {
+	/**
+	 * Main.
+	 * @param args
+	 * args.
+	 */
+	public static void main(final String[] args) {
 		Game g = new Game();
 		LevelView levelView = new LevelView(g);
-		levelView.setBounds(0,0,400,200);
+		levelView.setBounds(
+				ZERO,
+				ZERO,
+				FOURHUNDRED,
+				TWOHUNDRED
+		);
 		levelView.setVisible(true);
-		levelView.setTitle("Streaming Content Game");
-
+		levelView.setTitle(
+				"Streaming Content Game"
+		);
 	}
-
 }
