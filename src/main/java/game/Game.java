@@ -3,145 +3,258 @@ package game;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import frontend.MaxHoursView;
 import level.AdvanceLevel;
 import level.FactoryLevel;
 import level.Level;
 import level.MediumLevel;
 import programs.Program;
 
+/***
+ * @author Alessandro Pallaro & Hector Chavez
+ */
 public class Game {
-	Program program;
-	double IQ = 0;
-	ArrayList<Program> elections = new ArrayList<Program>();
-	HashMap<String, Double> categoryCount = new HashMap<String, Double>();
-	Double time;
-	Double initialT;
-	String result = "<html>Programas seleccionados:<br/>";
-	String percentages = "<html>Porcentaje Categorias:<br/>";
-	Level level;
-	String advertencia = "";
-	
-	public double getIQ() {
-		return this.IQ;
+	/***
+	 */
+	private final int pct = 100;
+
+	/***
+	 */
+	private double userIQ = 0;
+
+	/***
+	 */
+	private ArrayList<Program> elections;
+
+	/***
+	 */
+	private HashMap<String, Double> categoryCount;
+
+	/***
+	 */
+	private Double time;
+
+	/***
+	 */
+	private Double initialT;
+
+	/***
+	 *
+	 */
+	private String result = "<html>Programas seleccionados:<br/>";
+
+	/***
+	 */
+	private String percentages = "<html>Porcentaje Categorias:<br/>";
+
+	/***
+	 */
+	private String advertencia = "";
+
+	/***
+	 */
+	private Program program;
+
+	/***
+	 */
+	private Level level;
+
+	/***
+	 */
+	public Game() {
+		this.elections = new ArrayList<Program>();
+		this.categoryCount = new HashMap<String, Double>();
 	}
-	
-	public String getLevel() {
+
+	/***
+	 * @return double
+	 */
+	public final double getIQ() {
+		return this.userIQ;
+	}
+
+	/***
+	 * @return String
+	 */
+	public final String getLevel() {
 		return this.level.getLevel();
 	}
-	
-	public double getTime() {
+
+	/***
+	 * @return double
+	 */
+	public final double getTime() {
 		return this.time;
 	}
-	
-	public double getInitialT() {
+
+	/***
+	 * @return double
+	 */
+	public final double getInitialT() {
 		return this.initialT;
 	}
-	
-	public String getAdvertencia() {
+
+	/***
+	 * @return String
+	 */
+	public final String getAdvertencia() {
 		return this.advertencia;
 	}
-	
-	public void setAdvertencia(String a) {
+
+	/***
+	 * @param a String
+	 */
+	public final void setAdvertencia(final String a) {
 		this.advertencia = a;
 	}
-	
-	public void setLevel(String l) {
+
+	/***
+	 * @param l String
+	 */
+	public final void setLevel(final String l) {
 		FactoryLevel fl = new FactoryLevel();
 		this.level = fl.getLevel(l);
 	}
-	
-	public void setTime(Double t) {
+
+	/***
+	 * @param t double
+	 */
+	public final void setTime(final Double t) {
 		this.time = t;
 		this.initialT = t;
 	}
-	
-	public String getProgramLBL() {
+
+	/***
+	 * @return String
+	 */
+	public final String getProgramLBL() {
 		program = new Program();
 		return program.getName();
 	}
-	
-	public Double getDurationLBL() {
+
+	/***
+	 * @return Double
+	 */
+	public final double getDurationLBL() {
 		return program.getDuration();
 	}
-	
-	public String getResultsLBL() {
-		this.elections.forEach((p)->{
-			result = result.concat("Programa: " + p.getName() + "-> Duración: " + p.getTiempoVisto() + "<br/>");
+
+	/***
+	 * @return String
+	 */
+	public final String getResultsLBL() {
+		this.elections.forEach((p) -> {
+			result = result.concat(
+					"Programa: " + p.getName()
+					+ "-> Duración: " + p.getTiempoVisto()
+					+ "<br/>");
 		});
 		result = result.concat("</html>");
-		
+
 		System.out.println(result);
-		System.out.println(IQ);
+		System.out.println(userIQ);
 		return result;
 	}
-	
-	public String getPercentagesLBL() {
-		categoryCount.forEach((k, v) ->{
-			percentages = percentages.concat("Categoria: " + k + " -> " + (v / initialT) * 100 + "%" + "<br/>");
+
+	/**
+	 * @return String
+	 */
+	public final String getPercentagesLBL() {
+		categoryCount.forEach((k, v) -> {
+			percentages = percentages.concat(
+					"Categoria: " + k + " -> "
+					+ (v / initialT) * pct + "% <br/>");
 		});
-		
+
 		percentages = percentages.concat("</html>");
 
 		System.out.println(percentages);
-		
+
 		return  percentages;
 	}
-	
-	public String getProgramCategoryLevel() {
-		if(level instanceof AdvanceLevel) return program.getCategoryadvanced();
-		else if(level instanceof MediumLevel) return program.getCategorymedium();	
-		
+
+	/***
+	 * @return String
+	 */
+	public final String getProgramCategoryLevel() {
+		if (level instanceof AdvanceLevel) {
+			return program.getCategoryadvanced();
+		} else if (level instanceof MediumLevel) {
+			return program.getCategorymedium();
+		}
+
 		return program.getCategorybasic();
 	}
-	
-	public void addProgram() {
-		String cat = getProgramCategoryLevel();			
-		
-		if(categoryCount.containsKey(cat)) {
-			if(categoryCount.get(cat) + program.getDuration() <= (level.getCategory().get(cat).getMaxHr()/100) * initialT) {
-				if(this.time >= program.getDuration()) {
-					viewProgram(cat,  program.getDuration(), categoryCount.get(cat));
-				}
-				
-				else {
-					viewProgram(cat, this.time, categoryCount.get(cat));
-				}
-			}
-			
-			else if(categoryCount.get(cat) == (level.getCategory().get(cat).getMaxHr()/100) * initialT) {
-				advertencia = cat;
-				return;
-			}
-			
-			else {
-				double t = (level.getCategory().get(cat).getMaxHr()/100) * initialT - categoryCount.get(cat) < this.time? (level.getCategory().get(cat).getMaxHr()/100) * initialT - categoryCount.get(cat): this.time;
-				
-				viewProgram(cat, t, categoryCount.get(cat));
-			}
-			
+
+	/***
+	 * @param c String
+	 */
+	private void addHashMap(final String c) {
+		if (!categoryCount.containsKey(c)) {
+			categoryCount.put(c, 0.0);
 		}
-		
-		else {			
-			if(this.time >= program.getDuration()) {
-				viewProgram(cat, program.getDuration(), 0.0);
-			}
-			
-			else {
-				viewProgram(cat, this.time, 0.0);
-			}
-		}
-		System.out.println("-------------------------");
-		categoryCount.forEach((k, v) -> System.out.println("Key: " + k +" Hr:" + v + " MAX:" + level.getCategory().get(cat).getMaxHr()));
-		this.elections.add(program);
-		this.IQ += this.level.getCategory().get(cat).getMult() * program.getTiempoVisto();
 	}
-	
-	public void viewProgram(String ct, double d, double d2) {
+
+	/***
+	 * @param c String
+	 * @return double
+	 */
+	public double getPrtCategory(final String c) {
+		return (level.getCategory().get(c).getMaxHr() / pct) * initialT;
+	}
+
+	/***
+	 */
+	public final void addProgram() {
+		String cat = getProgramCategoryLevel();
+		addHashMap(cat);
+		double pctCat = getPrtCategory(cat);
+
+		if (categoryCount.get(cat) + program.getDuration() <= pctCat) {
+
+			if (this.time >= program.getDuration()) {
+				viewProgram(cat,  program.getDuration());
+			} else {
+				viewProgram(cat, this.time);
+			}
+
+		} else if (categoryCount.get(cat) == pctCat) {
+			advertencia = cat;
+			return;
+
+		} else {
+			double n;
+			n = (level.getCategory().get(cat)
+					.getMaxHr() / pct) * initialT;
+
+			double t;
+			t = n - categoryCount.get(cat) < this.time
+				? n - categoryCount.get(cat) : this.time;
+
+			viewProgram(cat, t);
+		}
+
+		categoryCount.forEach((k, v) ->
+			System.out.println("Key: " + k
+					+ " Hr:" + v + " MAX:"
+					+ level.getCategory().get(cat)
+					.getMaxHr())
+			);
+
+		this.elections.add(program);
+		this.userIQ += this.level.getCategory().get(cat).getMult()
+				* program.getTiempoVisto();
+	}
+
+	/***
+	 * @param ct String
+	 * @param d double
+	 */
+	public final void viewProgram(final String ct, final double d) {
 		program.setTiempoVisto(d);
 		this.time -= program.getTiempoVisto();
-		
-		categoryCount.put(ct, d + d2);
+
+		categoryCount.put(ct, d + categoryCount.get(ct));
 	}
-	
+
 }
+

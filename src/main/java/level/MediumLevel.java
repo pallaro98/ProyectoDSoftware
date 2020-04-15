@@ -11,22 +11,37 @@ import com.mongodb.client.MongoDatabase;
 import category.Category;
 import mongoDBclient.MongoDB;
 
+/***
+ * @author Pallaro & Hector
+ */
 public class MediumLevel implements Level {
+
+	/***
+	 */
 	private String level;
+
+	/***
+	 */
 	private HashMap<String, Category> categories;
 
+	/***
+	 */
 	public MediumLevel() {
 		categories = new HashMap<String, Category>();
 		this.level = "Medium";
 		setCategory();
 	}
-	
+
+	/***
+	 */
 	private void setCategory() {
 		MongoDatabase db = MongoDB.getInstance();
-		MongoCollection<Document> collection = db.getCollection("categoryMedium");
+		MongoCollection<Document> collection;
+		collection = db.getCollection("categoryMedium");
+
 		MongoCursor<Document> cursor = collection.find().iterator();
-		
-		while(cursor.hasNext()) {
+
+		while (cursor.hasNext()) {
 			Category c = new Category();
 			Document d = cursor.next();
 			c.setMult(d.getInteger("mult"));
@@ -35,11 +50,17 @@ public class MediumLevel implements Level {
 		}
 
 	}
-	
+
+	/***
+	 * @return HashMap<String, Category>
+	 */
 	public HashMap<String, Category> getCategory() {
 		return categories;
 	}
 
+	/***
+	 * @return String
+	 */
 	public String getLevel() {
 		return this.level;
 	}

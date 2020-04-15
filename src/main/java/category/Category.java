@@ -1,34 +1,43 @@
 package category;
 
+/***
+ * @author Pallaro & Hector
+ */
 public class Category {
+
+	/***
+	 */
 	private int mult;
+
+	/***
+	 */
 	private double maxHr;
-	
+
 	/**
 	 * @return the mult
 	 */
 	public int getMult() {
 		return mult;
 	}
-	
+
 	/**
-	 * @param mult the mult to set
+	 * @param m the mult to set
 	 */
-	public void setMult(int m) {
+	public void setMult(final int m) {
 		this.mult = m;
 	}
-	
+
 	/**
 	 * @return the maxHr
 	 */
 	public double getMaxHr() {
 		return maxHr;
 	}
-	
+
 	/**
-	 * @param maxHr the maxHr to set
+	 * @param mhr the maxHr to set
 	 */
-	public void setMaxHr(double mhr) {
+	public void setMaxHr(final double mhr) {
 		this.maxHr = mhr;
 	}
 
