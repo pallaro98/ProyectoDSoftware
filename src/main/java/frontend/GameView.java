@@ -8,88 +8,204 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
-
-public class GameView extends JFrame implements ActionListener{
+/**
+ * GameView Class.
+*/
+public class GameView extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JButton botonadd, botonskip;
-	private JLabel programLabel, durationLabel, timeLabel;
+	/**
+	 * botones.
+	 */
 
-	Game game;
-	public GameView(Game g) {
+	private JButton botonadd;
+
+	/***
+	 */
+	private JButton botonskip;
+
+	/**
+	 * labels.
+	 */
+	private JLabel programLabel;
+
+	/***
+	 */
+	private JLabel durationLabel;
+
+	/***
+	 */
+	private JLabel timeLabel;
+
+
+	/**
+	 * Constantes.
+	 */
+	static final int	ZERO = 0,
+						TEN = 10,
+						TWENTY = 20,
+						THIRTY = 30,
+						FIFTY = 50,
+						SEVENTY = 70,
+						NINETY = 90,
+						ONEHUNDREDTWENTY = 120,
+						ONEHUNDREDFIFTY = 150,
+						THREEHUNDREDSEVENTY = 370,
+						FOURHUNDRED = 400,
+						FOURHUNDREDEIGHTY = 480,
+						FIVEHUNDRED = 500,
+						EIGHTHUNDRED = 800;
+	/**
+	 * juego.
+	 */
+	private Game game;
+
+	/**
+	 * constructor.
+	 * @param g
+	 * Juego actual.
+	 */
+	public GameView(final Game g) {
 		game = g;
 		setLayout(null);
-		
-		programLabel =new JLabel();
-        programLabel.setText("Programa: " + g.getProgramLBL());
-        programLabel.setBounds(10,20,480,50);
-        add(programLabel);
-        
-        durationLabel =new JLabel();
-        durationLabel.setText("Duración: " + g.getDurationLBL() + " Hrs");
-        durationLabel.setBounds(10,70,480,50);
-        add(durationLabel);
-        
-        timeLabel =new JLabel();
-        timeLabel.setText("Tiempo Restante: " + g.getTime() + " Hrs");
-        timeLabel.setBounds(10,120,480,50);
+		programLabel = new JLabel();
+		programLabel.setText(
+				"Programa: "
+        		+ g.getProgramLBL()
+		);
+		programLabel.setBounds(
+				TEN,
+        		TWENTY,
+        		FOURHUNDREDEIGHTY,
+        		FIFTY
+				);
+		add(programLabel);
+		durationLabel = new JLabel();
+		durationLabel.setText(
+				"DuraciÃ³n: "
+				+ g.getDurationLBL()
+				+ " Hrs"
+		);
+		durationLabel.setBounds(
+				TEN,
+				SEVENTY,
+				FOURHUNDREDEIGHTY,
+				FIFTY
+		);
+		add(durationLabel);
+		timeLabel = new JLabel();
+		timeLabel.setText(
+				"Tiempo Restante: "
+				+ g.getTime()
+				+ " Hrs"
+        );
+        timeLabel.setBounds(
+        		TEN,
+        		ONEHUNDREDTWENTY,
+        		FOURHUNDREDEIGHTY,
+        		FIFTY
+        );
         add(timeLabel);
-		
-        botonadd=new JButton("Add");
-        botonadd.setBounds(10,400,90,30);
+        botonadd = new JButton("Add");
+        botonadd.setBounds(
+        		TEN,
+        		FOURHUNDRED,
+        		NINETY,
+        		THIRTY
+        );
         add(botonadd);
         botonadd.addActionListener(this);
-        
-        botonskip=new JButton("Skip");
-        botonskip.setBounds(370,400,90,30);
+        botonskip = new JButton("Skip");
+        botonskip.setBounds(
+        		THREEHUNDREDSEVENTY,
+        		FOURHUNDRED,
+        		NINETY,
+        		THIRTY
+        );
         add(botonskip);
-        botonskip.addActionListener(this);     
-        
+        botonskip.addActionListener(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==botonadd) {
-            addProgram();
-        } 
-        if (e.getSource()==botonskip) {
-            skipProgram();
-        }       
-    }
-	
-	void addProgram(){
-		
+	}
+
+	/**
+	 * acciones botones.
+	 * @param e
+	 * evento.
+	 */
+	public void actionPerformed(final ActionEvent e) {
+		if (e.getSource() == botonadd) {
+			addProgram();
+		}
+		if (e.getSource() == botonskip) {
+			skipProgram();
+		}
+	}
+
+	/**
+	 * agregar programa.
+	 */
+	void addProgram() {
 		this.setVisible(false);
-		
 		game.addProgram();
-		if(game.getAdvertencia() != "") {
+		if (game.getAdvertencia() != "") {
 			MaxHoursView maxHoursView = new MaxHoursView(game);
-			maxHoursView.setBounds(0,0,500,150);
+			maxHoursView.setBounds(
+					ZERO,
+					ZERO,
+					FIVEHUNDRED,
+					ONEHUNDREDFIFTY
+			);
 			maxHoursView.setVisible(true);
 			maxHoursView.setTitle("Advertencia");
 		} else {
-			if(game.getTime()<=0) {
-			
+			if (game.getTime() <= 0) {
 				ResultsView resultsView = new ResultsView(game);
-				resultsView.setBounds(0,0,800,800);
+				resultsView.setBounds(
+						ZERO,
+						ZERO,
+						EIGHTHUNDRED,
+						EIGHTHUNDRED
+				);
 				resultsView.setVisible(true);
-				resultsView.setTitle("Streaming Content Game     " + game.getLevel() + game.getInitialT());
+				resultsView.setTitle(
+						"Streaming Content Game     "
+						+ game.getLevel()
+						+ game.getInitialT()
+				);
 			} else {
 				GameView gameView = new GameView(game);
-				gameView.setBounds(0,0,500,500);
+				gameView.setBounds(
+						ZERO,
+						ZERO,
+						FIVEHUNDRED,
+						FIVEHUNDRED
+				);
 				gameView.setVisible(true);
-				gameView.setTitle("Streaming Content Game     " + game.getLevel() + game.getInitialT());
+				gameView.setTitle(
+						"Streaming Content Game     "
+						+ game.getLevel()
+						+ game.getInitialT()
+				);
 			}
 		}
-		
-		
-		
 	}
-	
-	void skipProgram(){
+
+	/**
+	 * saltar programa.
+	 */
+	void skipProgram() {
 		this.setVisible(false);
 		GameView gameView = new GameView(game);
-		gameView.setBounds(0,0,500,500);
+		gameView.setBounds(
+				ZERO,
+				ZERO,
+				FIVEHUNDRED,
+				FIVEHUNDRED
+		);
 		gameView.setVisible(true);
-		gameView.setTitle("Streaming Content Game     " + game.getLevel() + game.getInitialT());
+		gameView.setTitle(
+				"Streaming Content Game     "
+				+ game.getLevel()
+				+ game.getInitialT()
+		);
 	}
 }
