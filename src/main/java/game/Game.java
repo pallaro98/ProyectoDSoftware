@@ -145,7 +145,7 @@ public class Game {
 		this.elections.forEach((p) -> {
 			result = result.concat(
 					"Programa: " + p.getName()
-					+ "-> Duración: " + p.getTiempoVisto()
+					+ "-> Duraciï¿½n: " + p.getTiempoVisto()
 					+ "<br/>");
 		});
 		result = result.concat("</html>");
@@ -255,6 +255,27 @@ public class Game {
 
 		categoryCount.put(ct, d + categoryCount.get(ct));
 	}
+	
+/***
+* @param p
+* programa.
+*/
+public void setProgram(final Program p) {
+	this.program = p;
+}
+/***
+ * @return Program
+ */
+public Program getProgram() {
+	return this.program;
+}
+/***
+ * @param p Program
+ * @return boolean
+ */
+public boolean containsElection(Program p) {
+	return this.elections.contains(p);
+}
 
 }
 
