@@ -115,4 +115,44 @@ public class Program {
 	public double getTiempoVisto() {
 		return this.tiempoVisto;
 	}
+	/**
+	 * setDuration.
+	 * @param duration
+	 * duracion.
+	 */
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
+	/**
+	 * setTName.
+	 * @param name
+	 * nombre.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * setCategorybasic.
+	 * @param categorybasic
+	 * categoria para nivel basico.
+	 */
+	public void setCategorybasic(String categorybasic) {
+		this.categorybasic = categorybasic;
+	}
+	/**
+	 * setCategorymedium.
+	 * @param categorymedium
+	 * categoria para nivel medio.
+	 */
+	public void setCategorymedium(String categorymedium) {
+		this.categorymedium = categorymedium;
+	}
+	/**
+	 * setCategoryadvanced.
+	 * @param categoryadvanced
+	 * categoria para nivel avanzado.
+	 */
+	public void setCategoryadvanced(String categoryadvanced) {
+		this.categoryadvanced = categoryadvanced;
+	}
 }
