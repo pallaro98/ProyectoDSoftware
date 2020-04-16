@@ -199,7 +199,7 @@ public class Game {
       * @return double
       */
      public double getPrtCategory(final String c) {
-    	 System.out.println(level.getCategory().get(c));
+         System.out.println(level.getCategory().get(c));
           return (level.getCategory().get(c).getMaxHr() / pct) * initialT;
      }
 
