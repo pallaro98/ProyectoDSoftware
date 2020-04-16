@@ -6,7 +6,7 @@ import org.junit.*;
 
 import com.mongodb.client.MongoDatabase;
 
-import mongoDBclient.MongoDB;
+import mongo.Mongo;
 
 public class TestMongoDB {
 	
@@ -15,9 +15,9 @@ public class TestMongoDB {
 
 	@Test
 	public void testClose() {
-		mongoA = MongoDB.getInstance();
-		MongoDB.closeInstance();
-		mongoB = MongoDB.getInstance();
+		mongoA = Mongo.getInstance();
+		Mongo.closeInstance();
+		mongoB = Mongo.getInstance();
 		assertTrue((mongoA != mongoB));
 	}
 	

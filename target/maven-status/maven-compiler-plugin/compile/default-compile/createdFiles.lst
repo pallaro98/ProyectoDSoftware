@@ -5,4 +5,3 @@ frontend\ResultsView.class
 frontend\GameView.class
 frontend\LevelView.class
 frontend\MainView.class
-mongoDBclient\MongoDB.class

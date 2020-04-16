@@ -9,13 +9,13 @@ import category.Category;
  */
 public interface Level {
 
-	/***
-	 * @return String
-	 */
-	String getLevel();
+    /***
+      * @return String
+      */
+     String getLevel();
 
-	/***
-	 * @return HashMap<String, Category>
-	 */
-	HashMap<String, Category> getCategory();
+     /***
+      * @return HashMap<String, Category>
+      */
+     HashMap<String, Category> getCategory();
 }
