@@ -25,7 +25,5 @@ public class TestCategory {
 		cat.setMaxHr(10.0);
 		assertEquals(10.0, cat.getMaxHr(), .1);
 	}
-	
-	
 
 }

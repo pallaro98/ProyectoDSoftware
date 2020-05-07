@@ -1,7 +1,5 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import actions.Action;
 import actions.ActionAdd;
@@ -16,14 +14,13 @@ import programs.Program;
  * @author Alessandro Pallaro & Hector Chavez
  */
 public class Game {
-	 /***
+    /***
      */
     private GameAttributes gameAttributes;
-	
+
     /***
       */
      private final int pct = 100;
-
 
      /***
       *
@@ -33,19 +30,21 @@ public class Game {
      /***
       */
      private String percentages = "<html>Porcentaje Categorias:<br/>";
-     
 
      /***
       */
      private Level level;
-     
+
      /***
       */
      private Action action;
-     
+
      /***
       */
      private ActionAdd actionAdd;
+
+     /***
+      */
      private ActionDelete actionDelete;
 
      /***
@@ -54,8 +53,8 @@ public class Game {
          this.gameAttributes = new GameAttributes();
          this.actionDelete = new ActionDelete();
          this.actionAdd = new ActionAdd();
-         
-          this.action = actionAdd;
+
+         this.action = actionAdd;
      }
 
      /***
@@ -72,8 +71,6 @@ public class Game {
           FactoryLevel fl = new FactoryLevel();
           this.level = fl.getLevel(l);
      }
-
-     
 
      /***
       * @return Double
@@ -103,14 +100,12 @@ public class Game {
       * @return String
       */
      public final String getPercentagesLBL() {
-    	 gameAttributes.getCategoryCount().forEach((k, v) -> {
-               percentages = percentages.concat(
-                         "Categoria: " + k + " -> "
-                         + (v / gameAttributes.getInitialT()) * pct + "% <br/>");
+         gameAttributes.getCategoryCount().forEach((k, v) -> {
+             percentages = percentages.concat(
+                     "Categoria: " + k + " -> "
+                     + (v / gameAttributes.getInitialT()) * pct + "% <br/>");
           });
-
           percentages = percentages.concat("</html>");
-
           System.out.println(percentages);
 
           return  percentages;
@@ -135,16 +130,16 @@ public class Game {
       */
      public double getPrtCategory(final String c) {
          System.out.println(level.getCategory().get(c));
-          return (level.getCategory().get(c).getMaxHr() / pct) * gameAttributes.getInitialT();
+         return (level.getCategory().get(c).getMaxHr() / pct)
+                 * gameAttributes.getInitialT();
      }
 
      /***
       */
      public final void performAction() {
-    	 
- 		String cat = getProgramCategoryLevel();
-        double pctCat = getPrtCategory(cat);
-    	action.performAction(gameAttributes, cat, pctCat, level, pct);          
+         String cat = getProgramCategoryLevel();
+         double pctCat = getPrtCategory(cat);
+         action.performAction(gameAttributes, cat, pctCat, level);
      }
 
      /***
@@ -154,31 +149,34 @@ public class Game {
      public boolean containsElection(final Program p) {
          return this.gameAttributes.getElections().contains(p);
      }
-     
+
      /***
+      * @return action {@link Action}
       */
      public Action getAction() {
-    	 return this.action;
+         return this.action;
      }
-     
+
      /***
+      * @return gameAttributes {@link GameAttributes}
       */
      public GameAttributes getGameAttributes() {
-    	 return this.gameAttributes;
+         return this.gameAttributes;
      }
-     
-     public void changeAction() {	 
-    		 if(this.action == actionAdd) {
-    			 if(!this.gameAttributes.getElections().isEmpty()) {
-    				this.action = actionDelete;
-    			 }    		 
-	    	 } else {
-	    		 this.action = actionAdd;
-	    		 ActionDelete.i = 1;
-	    	 }
-	    	 System.out.println(this.action.getName());
-	    	 
+
+     /***
+      */
+     public void changeAction() {
+         if (this.action == actionAdd) {
+             if (!this.gameAttributes.getElections().isEmpty()) {
+                 this.action = actionDelete;
+             }
+         } else {
+             this.action = actionAdd;
+             actionDelete.setI(1);
+         }
+
+         System.out.println(this.action.getName());
      }
-     
 
 }

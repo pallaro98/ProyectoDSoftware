@@ -4,37 +4,57 @@ import game.GameAttributes;
 import level.Level;
 import programs.Program;
 
-public class ActionAdd implements Action{
-	String name = "Add";
-	
-	public String getName() {
-		return this.name;
-	}
+public class ActionAdd implements Action {
 
-	@Override
-	public void performAction(GameAttributes gameAttributes, String cat, double pctCat, Level level, int pct) {
+    /***
+     */
+    private final int pct = 100;
+
+    /***
+     */
+    private String name = "Add";
+
+    /***
+     * @return name {@link String}
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /***
+     * @param gameAttributes {@link GameAttributes}
+     * @param cat {@link String}
+     * @param pctCat {@link Double}
+     * @param level {@link Level}
+     */
+    public void performAction(final GameAttributes gameAttributes,
+            final String cat, final double pctCat, final Level level) {
         addHashMap(cat, gameAttributes);
 
-        if (gameAttributes.getCategoryCount().get(cat) + gameAttributes.getProgram().getDuration() <= pctCat) {
+        if (gameAttributes.getCategoryCount().get(cat)
+                + gameAttributes.getProgram().getDuration() <= pctCat) {
 
-             if (gameAttributes.getTime() >= gameAttributes.getProgram().getDuration()) {
-                  viewProgram(cat,  gameAttributes.getProgram().getDuration(), gameAttributes);
+             if (gameAttributes.getTime()
+                     >= gameAttributes.getProgram().getDuration()) {
+                 viewProgram(cat,  gameAttributes.getProgram().getDuration(),
+                         gameAttributes);
              } else {
                   viewProgram(cat, gameAttributes.getTime(), gameAttributes);
              }
 
         } else if (gameAttributes.getCategoryCount().get(cat) == pctCat) {
-      	  gameAttributes.setAdvertencia(cat);
-             return;
-
+            gameAttributes.setAdvertencia(cat);
+            return;
         } else {
              double n;
              n = (level.getCategory().get(cat)
                        .getMaxHr() / pct) * gameAttributes.getInitialT();
 
              double t;
-             t = n - gameAttributes.getCategoryCount().get(cat) < gameAttributes.getTime()
-                  ? n - gameAttributes.getCategoryCount().get(cat) : gameAttributes.getTime();
+             t = n - gameAttributes.getCategoryCount().get(cat)
+                     < gameAttributes.getTime()
+                     ? n - gameAttributes.getCategoryCount().get(cat)
+                             : gameAttributes.getTime();
 
              viewProgram(cat, t, gameAttributes);
         }
@@ -47,38 +67,43 @@ public class ActionAdd implements Action{
              );
 
         gameAttributes.getElections().add(gameAttributes.getProgram());
-        gameAttributes.setUserIQ(gameAttributes.getUserIQ() + level.getCategory().get(cat).getMult()
+        gameAttributes.setUserIQ(gameAttributes.getUserIQ()
+                + level.getCategory().get(cat).getMult()
                 * gameAttributes.getProgram().getTiempoVisto());
-	}
-	
-	/***
-     * @param c String
-     */
-    private void addHashMap(final String c, GameAttributes gameAttributes) {
-         if (!gameAttributes.getCategoryCount().containsKey(c)) {
-       	  gameAttributes.getCategoryCount().put(c, 0.0);
-         }
     }
-    
+
+    /***
+     * @param c {@link String}
+     * @param gameAttributes {@link GameAttributes}
+     */
+    private void addHashMap(final String c,
+                            final GameAttributes gameAttributes) {
+        if (!gameAttributes.getCategoryCount().containsKey(c)) {
+            gameAttributes.getCategoryCount().put(c, 0.0);
+        }
+    }
+
     /***
      * @param ct String
      * @param d double
+     * @param gameAttributes {@link GameAttributes}
      */
-    public final void viewProgram(final String ct, final double d, GameAttributes gameAttributes) {
-    	gameAttributes.getProgram().setTiempoVisto(d);
-         gameAttributes.setTime(gameAttributes.getTime()-gameAttributes.getProgram().getTiempoVisto());
+    public final void viewProgram(final String ct,
+            final double d, final GameAttributes gameAttributes) {
+        gameAttributes.getProgram().setTiempoVisto(d);
+        gameAttributes.setTime(gameAttributes.getTime()
+                - gameAttributes.getProgram().getTiempoVisto());
+        gameAttributes.getCategoryCount().put(ct, d
+                + gameAttributes.getCategoryCount().get(ct));
+    }
 
-         gameAttributes.getCategoryCount().put(ct, d + gameAttributes.getCategoryCount().get(ct));
-    }
-    
-    
     /***
-     * @return String
+     * @param gameAttributes {@link GameAttributes}
+     * @return gameAttributes.getProgram().getName() {@link String}
      */
-    public final String getProgramLBL(GameAttributes gameAttributes) {
+    public final String getProgramLBL(final GameAttributes gameAttributes) {
          gameAttributes.setProgram(new Program());
-         return  gameAttributes.getProgram().getName();
-        
+         return gameAttributes.getProgram().getName();
     }
-	
+
 }

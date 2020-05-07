@@ -8,7 +8,7 @@ import org.junit.*;
 
 import frontend.GameView;
 import game.Game;
-import level.AdvanceLevel;
+import level.BasicLevel;
 import programs.Program;
 
 public class TestGameView {
@@ -21,10 +21,10 @@ public class TestGameView {
 		
 		g = new Game();
 		p = new Program();
-		g.setProgram(p);
+		g.getGameAttributes().setProgram(p);
 		g.setLevel("Basic");
-		g.setTime(100.0);
-		g.addProgram();
+	    g.getGameAttributes().setTime(100.0);
+	    g.getAction().performAction(g.getGameAttributes(), "Adecuado", 100.0, new BasicLevel());;
 		gameView = new GameView(g);
 		gameView.setBounds(
 			0,

@@ -1,7 +1,0 @@
-game\Game.class
-programs\Program.class
-frontend\TimeView.class
-frontend\ResultsView.class
-frontend\GameView.class
-frontend\LevelView.class
-frontend\MainView.class

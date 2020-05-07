@@ -5,36 +5,74 @@ import level.Level;
 import programs.Program;
 
 public class ActionDelete implements Action {
-	String name = "Delete";
-	public static int i = 1;
-	
-	public String getName() {
-		return this.name;
-	}
 
-	@Override
-	public void performAction(GameAttributes gameAttributes, String cat, double pctCat, Level level, int pct) {
-		gameAttributes.setTime(gameAttributes.getTime() + gameAttributes.getProgram().getTiempoVisto());
-		gameAttributes.getElections().remove(gameAttributes.getProgram());
-		gameAttributes.setUserIQ(gameAttributes.getUserIQ()-(gameAttributes.getProgram().getTiempoVisto() * level.getCategory().get(cat).getMult()));
-		gameAttributes.getCategoryCount().replace(cat, gameAttributes.getCategoryCount().get(cat)- gameAttributes.getProgram().getTiempoVisto());
-		i--;
-	}
+    /***
+     */
+    private String name = "Delete";
 
-	@Override
-	public String getProgramLBL(GameAttributes gameAttributes) {
-		if(gameAttributes.getElections().isEmpty()) {
-			gameAttributes.setProgram(Program.programaDefault);
-			return "Ya no hay mas programas para borrar, cambia de modo";
-		}
-		
-		gameAttributes.setProgram(gameAttributes.getElections().get(gameAttributes.getElections().size()-i));
-		if(i<gameAttributes.getElections().size()) {
-			i++;
-		}
-        return  gameAttributes.getProgram().getName();
+    /***
+     */
+    private int i = 1;
 
-	}
+    /***
+     * @return i {@link Integer}
+     */
+    public int getI() {
+        return this.i;
+    }
 
-	
+    /***
+     * @param val {@link Integer}
+     */
+    public void setI(final int val) {
+        this.i = val;
+    }
+
+    /***
+     * @return name {@link String}
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /***
+     * @param gameAttributes {@link GameAttributes}
+     * @param cat {@link String}
+     * @param pctCat {@link Double}
+     * @param level {@link Level}
+     */
+    public void performAction(final GameAttributes gameAttributes,
+            final String cat, final double pctCat, final Level level) {
+        gameAttributes.setTime(gameAttributes.getTime()
+                + gameAttributes.getProgram().getTiempoVisto());
+        gameAttributes.getElections().remove(gameAttributes.getProgram());
+        gameAttributes.setUserIQ(gameAttributes.getUserIQ()
+                - (gameAttributes.getProgram().getTiempoVisto()
+                        * level.getCategory().get(cat).getMult()));
+        gameAttributes.getCategoryCount().replace(cat,
+                gameAttributes.getCategoryCount().get(cat)
+                - gameAttributes.getProgram().getTiempoVisto());
+        i--;
+    }
+
+    /***
+     * @param gameAttributes {@link GameAttributes}
+     * @return gameAttributes.getProgram().getName() {@link String}
+     */
+    public String getProgramLBL(final GameAttributes gameAttributes) {
+        if (gameAttributes.getElections().isEmpty()) {
+            gameAttributes.setProgram(Program.getProgramaDefault());
+            return "Ya no hay mas programas para borrar, cambia de modo";
+        }
+
+        gameAttributes.setProgram(gameAttributes.getElections().get(
+                gameAttributes.getElections().size() - i));
+
+        if (i < gameAttributes.getElections().size()) {
+            i++;
+        }
+
+        return gameAttributes.getProgram().getName();
+    }
+
 }

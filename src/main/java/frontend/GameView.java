@@ -18,7 +18,7 @@ public class GameView extends JFrame implements ActionListener {
       */
 
      private JButton botonaction;
-     
+
      /**
       * botones.
       */
@@ -112,7 +112,7 @@ public class GameView extends JFrame implements ActionListener {
         );
         add(botonskip);
         botonskip.addActionListener(this);
-        
+
         botoncambiaraccion = new JButton("change");
         botoncambiaraccion.setBounds(
                   Constants.ZERO,
@@ -122,8 +122,7 @@ public class GameView extends JFrame implements ActionListener {
         );
         add(botoncambiaraccion);
         botoncambiaraccion.addActionListener(this);
-        
-        
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
      }
 
@@ -136,10 +135,11 @@ public class GameView extends JFrame implements ActionListener {
           if (e.getSource() == botonaction) {
                performAction();
           }
+
           if (e.getSource() == botonskip) {
                skipProgram();
           }
-          
+
           if (e.getSource() == botoncambiaraccion) {
               changeAction();
          }
@@ -149,75 +149,76 @@ public class GameView extends JFrame implements ActionListener {
       * cambiar accion.
       */
      void changeAction() {
-    	 game.changeAction();
-    	 skipProgram();
+         game.changeAction();
+         skipProgram();
      }
      /**
       * agregar programa.
       */
      void performAction() {
-          this.setVisible(false);
-          game.performAction();
-          if (game.getGameAttributes().getAdvertencia() != "") {
-               MaxHoursView maxHoursView = new MaxHoursView(game);
-               maxHoursView.setBounds(
-                       Constants.ZERO,
-                       Constants.ZERO,
-                       Constants.FIVEHUNDRED,
-                       Constants.ONEHUNDREDFIFTY
-               );
-               maxHoursView.setVisible(true);
-               maxHoursView.setTitle("Advertencia");
-          } else {
-               if (game.getGameAttributes().getTime() <= 0) {
-                    ResultsView resultsView = new ResultsView(game);
-                    resultsView.setBounds(
-                              Constants.ZERO,
-                              Constants.ZERO,
-                              Constants.EIGHTHUNDRED,
-                              Constants.EIGHTHUNDRED
-                    );
-                    resultsView.setVisible(true);
-                    resultsView.setTitle(
-                              "Streaming Content Game     "
-                              + game.getLevel()
-                              + game.getGameAttributes().getInitialT()
-                    );
-               } else {
-                    GameView gameView = new GameView(game);
-                    gameView.setBounds(
-                              Constants.ZERO,
-                              Constants.ZERO,
-                              Constants.FIVEHUNDRED,
-                              Constants.FIVEHUNDRED
-                    );
-                    gameView.setVisible(true);
-                    gameView.setTitle(
-                              "Streaming Content Game     "
-                              + game.getLevel()
-                              + game.getGameAttributes().getInitialT()
-                    );
-               }
-          }
+         this.setVisible(false);
+         game.performAction();
+         if (game.getGameAttributes().getAdvertencia() != "") {
+             MaxHoursView maxHoursView = new MaxHoursView(game);
+             maxHoursView.setBounds(
+                     Constants.ZERO,
+                     Constants.ZERO,
+                     Constants.FIVEHUNDRED,
+                     Constants.ONEHUNDREDFIFTY
+                     );
+             maxHoursView.setVisible(true);
+             maxHoursView.setTitle("Advertencia");
+         } else {
+             if (game.getGameAttributes().getTime() <= 0) {
+                 ResultsView resultsView = new ResultsView(game);
+                 resultsView.setBounds(
+                         Constants.ZERO,
+                         Constants.ZERO,
+                         Constants.EIGHTHUNDRED,
+                         Constants.EIGHTHUNDRED
+                         );
+                 resultsView.setVisible(true);
+                 resultsView.setTitle(
+                         "Streaming Content Game     "
+                                 + game.getLevel()
+                                 + game.getGameAttributes().getInitialT()
+                         );
+             } else {
+                 GameView gameView = new GameView(game);
+                 gameView.setBounds(
+                         Constants.ZERO,
+                         Constants.ZERO,
+                         Constants.FIVEHUNDRED,
+                         Constants.FIVEHUNDRED
+                         );
+                 gameView.setVisible(true);
+                 gameView.setTitle(
+                         "Streaming Content Game     "
+                                 + game.getLevel()
+                                 + game.getGameAttributes().getInitialT()
+                         );
+             }
+         }
      }
 
      /**
       * saltar programa.
       */
      void skipProgram() {
-          this.setVisible(false);
-          GameView gameView = new GameView(game);
-          gameView.setBounds(
-                  Constants.ZERO,
-                  Constants.ZERO,
-                  Constants.FIVEHUNDRED,
-                  Constants.FIVEHUNDRED
-          );
-          gameView.setVisible(true);
-          gameView.setTitle(
-                    "Streaming Content Game     "
-                    + game.getLevel()
-                    + game.getGameAttributes().getInitialT()
-          );
+         this.setVisible(false);
+         GameView gameView = new GameView(game);
+         gameView.setBounds(
+                 Constants.ZERO,
+                 Constants.ZERO,
+                 Constants.FIVEHUNDRED,
+                 Constants.FIVEHUNDRED
+                 );
+         gameView.setVisible(true);
+         gameView.setTitle(
+                 "Streaming Content Game     "
+                         + game.getLevel()
+                         + game.getGameAttributes().getInitialT()
+                 );
      }
+
 }

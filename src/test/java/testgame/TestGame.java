@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 
 import game.Game;
+import level.BasicLevel;
 import programs.Program;
 
 public class TestGame {
@@ -19,15 +20,15 @@ public class TestGame {
 	public void setUp() {
 			g = new Game();
 			p = new Program();
-			g.setProgram(p);
+			g.getGameAttributes().setProgram(p);
 			g.setLevel("Basic");
-			g.setTime(100.0);
-			g.addProgram();
+			g.getGameAttributes().setTime(100.0);
+		    g.getAction().performAction(g.getGameAttributes(), "Adecuado", 100.0, new BasicLevel());;
 	   }
 	
 	@Test
 	public void testGetProgram() {
-		assertTrue(p == g.getProgram());
+		assertTrue(p == g.getGameAttributes().getProgram());
 	}
 	
 	@Test

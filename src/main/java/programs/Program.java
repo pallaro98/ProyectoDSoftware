@@ -40,17 +40,17 @@ public class Program {
      * Categoria para nivel Avanzado.
      */
     private String categoryadvanced;
-    
-    /**
-     * .
-     */
-    public static Program programaDefault = new Program(0.0, 0.0, "No hay más");
 
-    
+    /**
+     */
+    private static Program programaDefault;
+
     /**
      * constructor.
      */
     public Program() {
+        programaDefault = new Program(0.0, 0.0, "No hay más");
+
         MongoDatabase db = Mongo.getInstance();
         MongoCollection<Document> collection =
                 db.getCollection("programas");
@@ -69,18 +69,19 @@ public class Program {
         this.categoryadvanced = result.getString("categoryadvanced");
         this.duration = result.getDouble("duration");
     }
-    
-    /**
-     * constructor.
+
+    /***
+     * @param d {@link Double}
+     * @param tv {@link Double}
+     * @param n {@link String}
      */
-    public Program(Double d, double tv, String n) {
+    private Program(final Double d, final double tv, final String n) {
         this.duration = d;
         this.tiempoVisto = tv;
         this.name = n;
         this.categorybasic = "Adecuado";
         this.categorymedium = "Sexual";
         this.categoryadvanced = "Sexual";
-        
     }
 
     /**
@@ -183,5 +184,12 @@ public class Program {
     */
     public void setCategoryadvanced(final String cat) {
         this.categoryadvanced = cat;
+    }
+
+    /**
+     * @return the programaDefault
+     */
+    public static Program getProgramaDefault() {
+        return programaDefault;
     }
 }
