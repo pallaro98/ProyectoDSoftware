@@ -15,6 +15,10 @@ import game.Game;
 public class LevelView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
+    /***
+     */
+    private boolean bWorked = false;
+
      /**
       * botones.
       */
@@ -99,12 +103,15 @@ public class LevelView extends JFrame implements ActionListener {
       */
      public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == botonbasic) {
+            bWorked = true;
             openSelectTime("Basic");
         }
         if (e.getSource() == botonmedium) {
+            bWorked = true;
              openSelectTime("Medium");
         }
         if (e.getSource() == botonadvanced) {
+            bWorked = true;
              openSelectTime("Advanced");
         }
     }
@@ -130,5 +137,33 @@ public class LevelView extends JFrame implements ActionListener {
                    "Streaming Content Game     "
                    + game.getLevel()
          );
+     }
+
+     /***
+      * @return botonbasic {@link JButton}
+      */
+     public JButton getBotonBasic() {
+         return this.botonbasic;
+     }
+
+     /***
+      * @return botonmedium {@link JButton}
+      */
+     public JButton getBotonMedium() {
+         return this.botonmedium;
+     }
+
+     /***
+      * @return botonadvanced {@link JButton}
+      */
+     public JButton getBotonAdvanced() {
+         return this.botonadvanced;
+     }
+
+     /***
+      * @return bWorked {@link Boolean}
+      */
+     public boolean bWorked() {
+         return this.bWorked;
      }
 }

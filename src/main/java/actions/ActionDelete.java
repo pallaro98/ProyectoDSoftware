@@ -43,6 +43,7 @@ public class ActionDelete implements Action {
      */
     public void performAction(final GameAttributes gameAttributes,
             final String cat, final double pctCat, final Level level) {
+        System.out.println("CAT:" +  gameAttributes.getCategoryCount());
         gameAttributes.setTime(gameAttributes.getTime()
                 + gameAttributes.getProgram().getTiempoVisto());
         gameAttributes.getElections().remove(gameAttributes.getProgram());

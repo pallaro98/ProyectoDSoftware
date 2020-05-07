@@ -13,6 +13,11 @@ import game.Game;
 */
 public class GameView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
+
+    /***
+     */
+    private boolean bWorked = false;
+
      /**
       * botones.
       */
@@ -24,7 +29,6 @@ public class GameView extends JFrame implements ActionListener {
       */
 
      private JButton botoncambiaraccion;
-
 
      /***
       */
@@ -133,14 +137,17 @@ public class GameView extends JFrame implements ActionListener {
       */
      public void actionPerformed(final ActionEvent e) {
           if (e.getSource() == botonaction) {
+              bWorked = true;
                performAction();
           }
 
           if (e.getSource() == botonskip) {
+              bWorked = true;
                skipProgram();
           }
 
           if (e.getSource() == botoncambiaraccion) {
+              bWorked = true;
               changeAction();
          }
      }
@@ -156,6 +163,7 @@ public class GameView extends JFrame implements ActionListener {
       * agregar programa.
       */
      void performAction() {
+         System.out.println("kpedo");
          this.setVisible(false);
          game.performAction();
          if (game.getGameAttributes().getAdvertencia() != "") {
@@ -219,6 +227,34 @@ public class GameView extends JFrame implements ActionListener {
                          + game.getLevel()
                          + game.getGameAttributes().getInitialT()
                  );
+     }
+
+     /***
+      * @return botonaction {@link JButton}
+      */
+     public JButton getBotonAction() {
+         return this.botonaction;
+     }
+
+     /***
+      * @return botonskip {@link JButton}
+      */
+     public JButton getBotonSkip() {
+         return this.botonskip;
+     }
+
+     /***
+      * @return botoncambiaraccion {@link JButton}
+      */
+     public JButton getChangeAction() {
+         return this.botoncambiaraccion;
+     }
+
+     /***
+      * @return bWorked {@link Boolean}
+      */
+     public boolean bWorked() {
+         return this.bWorked;
      }
 
 }

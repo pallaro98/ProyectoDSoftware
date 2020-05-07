@@ -14,6 +14,10 @@ import game.Game;
 public class TimeView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
+    /***
+     */
+    private boolean bWorked = false;
+
      /**
       * Boton.
       */
@@ -101,12 +105,15 @@ public class TimeView extends JFrame implements ActionListener {
       */
      public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == boton100h) {
+            bWorked = true;
             openGame(Constants.ONEHUNDRED);
         }
         if (e.getSource() == boton200h) {
+            bWorked = true;
             openGame(Constants.TWOHUNDRED);
         }
         if (e.getSource() == boton300h) {
+            bWorked = true;
             openGame(Constants.THREEHUNDRED);
         }
     }
@@ -134,4 +141,32 @@ public class TimeView extends JFrame implements ActionListener {
                     + game.getGameAttributes().getInitialT()
           );
     }
+
+     /***
+      * @return boton100h {@link JButton}
+      */
+     public JButton getBoton100() {
+         return this.boton100h;
+     }
+
+     /***
+      * @return boton200h {@link JButton}
+      */
+     public JButton getBoton200() {
+         return this.boton200h;
+     }
+
+     /***
+      * @return boton300h {@link JButton}
+      */
+     public JButton getBoton300() {
+         return this.boton300h;
+     }
+
+     /***
+      * @return bWorked {@link Boolean}
+      */
+     public boolean bWorked() {
+         return this.bWorked;
+     }
 }

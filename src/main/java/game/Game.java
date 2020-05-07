@@ -179,4 +179,11 @@ public class Game {
          System.out.println(this.action.getName());
      }
 
+     /***
+      * @param ga {@link GameAttributes}
+      */
+     public final void setGameAttributes(final GameAttributes ga) {
+         this.gameAttributes = ga;
+     }
+
 }
