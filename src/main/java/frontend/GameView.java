@@ -17,7 +17,14 @@ public class GameView extends JFrame implements ActionListener {
       * botones.
       */
 
-     private JButton botonadd;
+     private JButton botonaction;
+     
+     /**
+      * botones.
+      */
+
+     private JButton botoncambiaraccion;
+
 
      /***
       */
@@ -52,7 +59,7 @@ public class GameView extends JFrame implements ActionListener {
           programLabel = new JLabel();
           programLabel.setText(
                     "Programa: "
-                  + g.getProgramLBL()
+                  + g.getAction().getProgramLBL(g.getGameAttributes())
           );
           programLabel.setBounds(
                     Constants.TEN,
@@ -77,7 +84,7 @@ public class GameView extends JFrame implements ActionListener {
           timeLabel = new JLabel();
           timeLabel.setText(
                     "Tiempo Restante: "
-                    + g.getTime()
+                    + g.getGameAttributes().getTime()
                     + " Hrs"
         );
         timeLabel.setBounds(
@@ -87,15 +94,15 @@ public class GameView extends JFrame implements ActionListener {
                   Constants.FIFTY
         );
         add(timeLabel);
-        botonadd = new JButton("Add");
-        botonadd.setBounds(
+        botonaction = new JButton(g.getAction().getName());
+        botonaction.setBounds(
                   Constants.TEN,
                 Constants.FOURHUNDRED,
                 Constants.NINETY,
                 Constants.THIRTY
         );
-        add(botonadd);
-        botonadd.addActionListener(this);
+        add(botonaction);
+        botonaction.addActionListener(this);
         botonskip = new JButton("Skip");
         botonskip.setBounds(
                   Constants.THREEHUNDREDSEVENTY,
@@ -105,6 +112,18 @@ public class GameView extends JFrame implements ActionListener {
         );
         add(botonskip);
         botonskip.addActionListener(this);
+        
+        botoncambiaraccion = new JButton("change");
+        botoncambiaraccion.setBounds(
+                  Constants.ZERO,
+                  Constants.ZERO,
+                  Constants.NINETY,
+                  Constants.THIRTY
+        );
+        add(botoncambiaraccion);
+        botoncambiaraccion.addActionListener(this);
+        
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
      }
 
@@ -114,24 +133,35 @@ public class GameView extends JFrame implements ActionListener {
       * evento.
       */
      public void actionPerformed(final ActionEvent e) {
-          if (e.getSource() == botonadd) {
-               addProgram();
+          if (e.getSource() == botonaction) {
+               performAction();
           }
           if (e.getSource() == botonskip) {
                skipProgram();
           }
+          
+          if (e.getSource() == botoncambiaraccion) {
+              changeAction();
+         }
      }
 
      /**
+      * cambiar accion.
+      */
+     void changeAction() {
+    	 game.changeAction();
+    	 skipProgram();
+     }
+     /**
       * agregar programa.
       */
-     void addProgram() {
+     void performAction() {
           this.setVisible(false);
-          game.addProgram();
-          if (game.getAdvertencia() != "") {
+          game.performAction();
+          if (game.getGameAttributes().getAdvertencia() != "") {
                MaxHoursView maxHoursView = new MaxHoursView(game);
                maxHoursView.setBounds(
-                         Constants.ZERO,
+                       Constants.ZERO,
                        Constants.ZERO,
                        Constants.FIVEHUNDRED,
                        Constants.ONEHUNDREDFIFTY
@@ -139,7 +169,7 @@ public class GameView extends JFrame implements ActionListener {
                maxHoursView.setVisible(true);
                maxHoursView.setTitle("Advertencia");
           } else {
-               if (game.getTime() <= 0) {
+               if (game.getGameAttributes().getTime() <= 0) {
                     ResultsView resultsView = new ResultsView(game);
                     resultsView.setBounds(
                               Constants.ZERO,
@@ -151,7 +181,7 @@ public class GameView extends JFrame implements ActionListener {
                     resultsView.setTitle(
                               "Streaming Content Game     "
                               + game.getLevel()
-                              + game.getInitialT()
+                              + game.getGameAttributes().getInitialT()
                     );
                } else {
                     GameView gameView = new GameView(game);
@@ -165,7 +195,7 @@ public class GameView extends JFrame implements ActionListener {
                     gameView.setTitle(
                               "Streaming Content Game     "
                               + game.getLevel()
-                              + game.getInitialT()
+                              + game.getGameAttributes().getInitialT()
                     );
                }
           }
@@ -187,7 +217,7 @@ public class GameView extends JFrame implements ActionListener {
           gameView.setTitle(
                     "Streaming Content Game     "
                     + game.getLevel()
-                    + game.getInitialT()
+                    + game.getGameAttributes().getInitialT()
           );
      }
 }

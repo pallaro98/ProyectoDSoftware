@@ -40,7 +40,7 @@ public class MaxHoursView extends JFrame implements ActionListener {
         messageLabel = new JLabel();
         messageLabel.setText(
                   "Ya no puedes ver mas contenido de "
-                  + game.getAdvertencia()
+                  + game.getGameAttributes().getAdvertencia()
         );
         messageLabel.setBounds(
                   Constants.TEN,
@@ -73,7 +73,7 @@ public class MaxHoursView extends JFrame implements ActionListener {
      public void actionPerformed(final ActionEvent e) {
           if (e.getSource() == botonclose) {
                this.setVisible(false);
-               game.setAdvertencia("");
+               game.getGameAttributes().setAdvertencia("");
                GameView gameView = new GameView(game);
                gameView.setBounds(
                          Constants.ZERO,
@@ -85,7 +85,7 @@ public class MaxHoursView extends JFrame implements ActionListener {
                gameView.setTitle(
                          "Streaming Content Game     "
                          + game.getLevel()
-                         + game.getInitialT()
+                         + game.getGameAttributes().getInitialT()
                );
           }
     }

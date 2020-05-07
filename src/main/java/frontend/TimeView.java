@@ -117,7 +117,7 @@ public class TimeView extends JFrame implements ActionListener {
       * tiempo.
       */
      public void openGame(final double i) {
-          game.setTime(i);
+          game.getGameAttributes().setInitialT(i);
 
           this.setVisible(false);
           GameView gameView = new GameView(game);
@@ -131,7 +131,7 @@ public class TimeView extends JFrame implements ActionListener {
           gameView.setTitle(
                     "Streaming Content Game     "
                     + game.getLevel()
-                    + game.getInitialT()
+                    + game.getGameAttributes().getInitialT()
           );
     }
 }

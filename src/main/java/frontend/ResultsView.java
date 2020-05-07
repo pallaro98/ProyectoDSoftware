@@ -51,7 +51,7 @@ public class ResultsView extends JFrame implements ActionListener {
         iqLabel = new JLabel();
         iqLabel.setText(
                   "Tu nuevo IQ fue de: "
-                  + game.getIQ()
+                  + game.getGameAttributes().getUserIQ()
         );
         iqLabel.setBounds(
                   Constants.TEN,

@@ -40,7 +40,13 @@ public class Program {
      * Categoria para nivel Avanzado.
      */
     private String categoryadvanced;
+    
+    /**
+     * .
+     */
+    public static Program programaDefault = new Program(0.0, 0.0, "No hay más");
 
+    
     /**
      * constructor.
      */
@@ -62,6 +68,19 @@ public class Program {
         this.categorymedium = result.getString("categorymedium");
         this.categoryadvanced = result.getString("categoryadvanced");
         this.duration = result.getDouble("duration");
+    }
+    
+    /**
+     * constructor.
+     */
+    public Program(Double d, double tv, String n) {
+        this.duration = d;
+        this.tiempoVisto = tv;
+        this.name = n;
+        this.categorybasic = "Adecuado";
+        this.categorymedium = "Sexual";
+        this.categoryadvanced = "Sexual";
+        
     }
 
     /**
